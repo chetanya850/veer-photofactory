@@ -8,7 +8,7 @@ const AboutPage: FC = () => {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
           <div className="space-y-8">
-            <h1 className="text-4xl lg:text-5xl font-light text-stone-800">
+            <h1 className="text-4xl lg:text-5xl font-light text-stone-800 rouge-script-regular">
               About{' '}
               <span className="text-amber-700 italic">Veer Photofactory</span>
             </h1>

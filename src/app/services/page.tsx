@@ -38,7 +38,7 @@ const ServicesPage: FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50 pt-24">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <h1 className="text-4xl lg:text-5xl font-light text-stone-800 mb-12 text-center">
+        <h1 className="text-4xl lg:text-5xl font-light text-stone-800 mb-12 text-center rouge-script-regular">
           Our <span className="text-amber-700 italic">Services</span>
         </h1>
 
@@ -77,7 +77,10 @@ const ServicesPage: FC = () => {
         <div className="mt-20 bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg">
           <h2 className="text-3xl font-light text-stone-800 mb-6 text-center">
             Ready to Create{' '}
-            <span className="text-amber-700 italic">Memories</span>?
+            <span className="text-amber-700 italic rouge-script-regular">
+              Memories
+            </span>
+            ?
           </h2>
           <p className="text-stone-600 text-center max-w-2xl mx-auto mb-8">
             Contact us to discuss your photography needs and let us help you

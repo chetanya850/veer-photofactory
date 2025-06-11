@@ -26,7 +26,7 @@ const ContactPage: FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50 pt-24">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <h1 className="text-4xl lg:text-5xl font-light text-stone-800 mb-12 text-center">
+        <h1 className="text-4xl lg:text-5xl font-light text-stone-800 mb-12 text-center rouge-script-regular">
           Get in <span className="text-amber-700 italic">Touch</span>
         </h1>
 

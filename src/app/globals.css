@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,4 +14,10 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+.rouge-script-regular {
+  font-family: 'Rouge Script', cursive;
+  font-weight: 400;
+  font-style: normal;
 }
