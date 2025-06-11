@@ -341,7 +341,7 @@ const LandingPage2: FC = () => {
                   </div>
                   <div className="hero-image aspect-[3/4] bg-stone-200 rounded-sm overflow-hidden shadow-sm">
                     <Image
-                      src="/images/VEE06199.jpg"
+                      src="/images/VEE06606.jpg"
                       alt="Wedding Details"
                       width={1000}
                       height={150}
@@ -354,9 +354,7 @@ const LandingPage2: FC = () => {
               {/* Animated Floating Element */}
               <div
                 className="absolute -top-4 -right-4 w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg cursor-pointer"
-                style={{
-                  animation: 'pulse 4s ease-in-out infinite'
-                }}
+                style={{ animation: 'pulse 4s ease-in-out infinite' }}
               >
                 <Heart className="h-5 w-5 text-amber-600" />
               </div>
