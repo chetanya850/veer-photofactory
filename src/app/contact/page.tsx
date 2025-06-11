@@ -1,4 +1,5 @@
 'use client'
+import { motion } from 'framer-motion'
 import { Instagram, Mail, MapPin, Phone } from 'lucide-react'
 import { FC, useState } from 'react'
 
@@ -23,78 +24,102 @@ const ContactPage: FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut'
+      }
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50 pt-24">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <h1 className="text-4xl lg:text-5xl font-light text-stone-800 mb-12 text-center rouge-script-regular">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl lg:text-5xl font-light text-stone-800 mb-12 text-center rouge-script-regular"
+        >
           Get in <span className="text-amber-700 italic">Touch</span>
-        </h1>
+        </motion.h1>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid lg:grid-cols-2 gap-12"
+        >
           {/* Contact Form */}
-          <div className="bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg">
-            <h2 className="text-2xl font-light text-stone-800 mb-6">
+          <motion.div
+            variants={itemVariants}
+            className="bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg"
+          >
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-2xl font-light text-stone-800 mb-6"
+            >
               Send us a Message
-            </h2>
+            </motion.h2>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-stone-700 mb-2"
+              {[
+                { name: 'name', label: 'Name', type: 'text' },
+                { name: 'email', label: 'Email', type: 'email' },
+                { name: 'phone', label: 'Phone', type: 'tel' }
+              ].map((field, index) => (
+                <motion.div
+                  key={field.name}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 + index * 0.1 }}
                 >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-stone-700 mb-2"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-stone-700 mb-2"
-                >
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
-                />
-              </div>
-              <div>
+                  <label
+                    htmlFor={field.name}
+                    className="block text-sm font-medium text-stone-700 mb-2"
+                  >
+                    {field.label}
+                  </label>
+                  <motion.input
+                    whileFocus={{ scale: 1.02 }}
+                    type={field.type}
+                    id={field.name}
+                    name={field.name}
+                    value={formData[field.name as keyof typeof formData]}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    required={field.type !== 'tel'}
+                  />
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 }}
+              >
                 <label
                   htmlFor="message"
                   className="block text-sm font-medium text-stone-700 mb-2"
                 >
                   Message
                 </label>
-                <textarea
+                <motion.textarea
+                  whileFocus={{ scale: 1.02 }}
                   id="message"
                   name="message"
                   value={formData.message}
@@ -103,60 +128,94 @@ const ContactPage: FC = () => {
                   className="w-full px-4 py-2 border border-stone-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
                   required
                 />
-              </div>
-              <button
+              </motion.div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 type="submit"
                 className="w-full px-6 py-3 bg-amber-700 text-white rounded-sm hover:bg-amber-800 transition-colors duration-300"
               >
                 Send Message
-              </button>
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
 
           {/* Contact Information */}
-          <div className="space-y-8">
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg">
-              <h2 className="text-2xl font-light text-stone-800 mb-6">
+          <motion.div variants={itemVariants} className="space-y-8">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg"
+            >
+              <motion.h2
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="text-2xl font-light text-stone-800 mb-6"
+              >
                 Contact Information
-              </h2>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <Mail className="h-5 w-5 text-amber-700" />
-                  <span className="text-stone-600">
-                    contact@veerphotofactory.com
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <Phone className="h-5 w-5 text-amber-700" />
-                  <span className="text-stone-600">+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <MapPin className="h-5 w-5 text-amber-700" />
-                  <span className="text-stone-600">
-                    123 Photography Street, City, Country
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <Instagram className="h-5 w-5 text-amber-700" />
-                  <span className="text-stone-600">@veerphotofactory</span>
-                </div>
-              </div>
-            </div>
+              </motion.h2>
+              <motion.div
+                className="space-y-4"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {[
+                  { icon: Mail, text: 'contact@veerphotofactory.com' },
+                  { icon: Phone, text: '+1 (555) 123-4567' },
+                  {
+                    icon: MapPin,
+                    text: '123 Photography Street, City, Country'
+                  },
+                  { icon: Instagram, text: '@veerphotofactory' }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className="flex items-center gap-4"
+                  >
+                    <item.icon className="h-5 w-5 text-amber-700" />
+                    <span className="text-stone-600">{item.text}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
 
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg">
-              <h2 className="text-2xl font-light text-stone-800 mb-6">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg"
+            >
+              <motion.h2
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="text-2xl font-light text-stone-800 mb-6"
+              >
                 Business Hours
-              </h2>
-              <div className="space-y-2">
-                <p className="text-stone-600">
-                  Monday - Friday: 9:00 AM - 6:00 PM
-                </p>
-                <p className="text-stone-600">Saturday: 10:00 AM - 4:00 PM</p>
-                <p className="text-stone-600">Sunday: Closed</p>
-              </div>
-            </div>
-          </div>
-        </div>
+              </motion.h2>
+              <motion.div
+                className="space-y-2"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                {[
+                  'Monday - Friday: 9:00 AM - 6:00 PM',
+                  'Saturday: 10:00 AM - 4:00 PM',
+                  'Sunday: Closed'
+                ].map((text, index) => (
+                  <motion.p
+                    key={index}
+                    variants={itemVariants}
+                    className="text-stone-600"
+                  >
+                    {text}
+                  </motion.p>
+                ))}
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   )

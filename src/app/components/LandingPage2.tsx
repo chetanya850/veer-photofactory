@@ -188,8 +188,14 @@ const LandingPage2: FC = () => {
             }`}
           >
             <Link href="/" className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-amber-600 to-orange-700 rounded-lg flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
-                <span className="text-white font-bold text-sm">V</span>
+              <div className="w-12 h-12 relative">
+                <Image
+                  src="/images/logo1.png"
+                  alt="Veer Photofactory Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
               <span className="text-xl font-light text-stone-800 tracking-wide">
                 Veer Photofactory

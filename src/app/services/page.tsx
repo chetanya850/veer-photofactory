@@ -1,4 +1,5 @@
 'use client'
+import { motion } from 'framer-motion'
 import { Calendar, Camera, Heart, Users } from 'lucide-react'
 import Image from 'next/image'
 import { FC } from 'react'
@@ -35,63 +36,132 @@ const ServicesPage: FC = () => {
     }
   ]
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut'
+      }
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50 pt-24">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <h1 className="text-4xl lg:text-5xl font-light text-stone-800 mb-12 text-center rouge-script-regular">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl lg:text-5xl font-light text-stone-800 mb-12 text-center rouge-script-regular"
+        >
           Our <span className="text-amber-700 italic">Services</span>
-        </h1>
+        </motion.h1>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid md:grid-cols-2 gap-12"
+        >
           {services.map(service => (
-            <div
+            <motion.div
               key={service.title}
+              variants={itemVariants}
+              whileHover={{
+                scale: 1.02,
+                transition: { duration: 0.2 }
+              }}
               className="bg-white/80 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <div className="relative h-64">
+              <motion.div
+                className="relative h-64"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
                 <Image
                   src={`/images/${service.image}`}
                   alt={service.title}
                   fill
                   className="object-cover"
                 />
-              </div>
+              </motion.div>
               <div className="p-8">
-                <div className="flex items-center gap-4 mb-4">
+                <motion.div
+                  className="flex items-center gap-4 mb-4"
+                  whileHover={{ x: 5 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <service.icon className="h-6 w-6 text-amber-700" />
                   <h3 className="text-2xl font-light text-stone-800">
                     {service.title}
                   </h3>
-                </div>
+                </motion.div>
                 <p className="text-stone-600 leading-relaxed">
                   {service.description}
                 </p>
-                <button className="mt-6 px-6 py-2 bg-amber-700 text-white rounded-sm hover:bg-amber-800 transition-colors duration-300">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="mt-6 px-6 py-2 bg-amber-700 text-white rounded-sm hover:bg-amber-800 transition-colors duration-300"
+                >
                   Learn More
-                </button>
+                </motion.button>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="mt-20 bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg">
-          <h2 className="text-3xl font-light text-stone-800 mb-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-20 bg-white/80 backdrop-blur-sm rounded-lg p-8 shadow-lg"
+        >
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="text-3xl font-light text-stone-800 mb-6 text-center"
+          >
             Ready to Create{' '}
-            <span className="text-amber-700 italic rouge-script-regular">
-              Memories
-            </span>
-            ?
-          </h2>
-          <p className="text-stone-600 text-center max-w-2xl mx-auto mb-8">
+            <span className="text-amber-700 italic">Memories</span>?
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="text-stone-600 text-center max-w-2xl mx-auto mb-8"
+          >
             Contact us to discuss your photography needs and let us help you
             capture your special moments with our professional services.
-          </p>
-          <div className="flex justify-center">
-            <button className="px-8 py-3 bg-amber-700 text-white rounded-sm hover:bg-amber-800 transition-colors duration-300">
+          </motion.p>
+          <motion.div
+            className="flex justify-center"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-amber-700 text-white rounded-sm hover:bg-amber-800 transition-colors duration-300"
+            >
               Contact Us
-            </button>
-          </div>
-        </div>
+            </motion.button>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   )
