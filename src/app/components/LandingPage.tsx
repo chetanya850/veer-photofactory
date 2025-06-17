@@ -34,7 +34,7 @@ const LandingPage: FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-pink-50 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-pink-50 overflow-hidden pb-16">
       {/* Navigation */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}

@@ -14,7 +14,7 @@ const LandingPage2: FC = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50 pb-16">
       <style jsx>{`
         @keyframes float {
           0%,
@@ -190,7 +190,7 @@ const LandingPage2: FC = () => {
             <Link href="/" className="flex items-center space-x-3">
               <div className="w-12 h-12 relative">
                 <Image
-                  src="/images/logo1.png"
+                  src="/images/Logo.png"
                   alt="Veer Photofactory Logo"
                   fill
                   className="object-contain"
@@ -274,7 +274,7 @@ const LandingPage2: FC = () => {
                   <span className="block text-stone-800 font-light mb-2 hover:text-amber-800 transition-colors duration-500">
                     Capturing
                   </span>
-                  <span className="block text-amber-700 font-normal italic mb-2 hover:scale-105 transition-transform duration-300 inline-block">
+                  <span className="block text-amber-700 font-normal italic mb-2 hover:scale-105 transition-transform duration-300 ">
                     Love Stories
                   </span>
                   <span className="block text-stone-800 font-light hover:text-amber-800 transition-colors duration-500">
@@ -355,14 +355,6 @@ const LandingPage2: FC = () => {
                     />
                   </div>
                 </div>
-              </div>
-
-              {/* Animated Floating Element */}
-              <div
-                className="absolute -top-4 -right-4 w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center hover:shadow-lg cursor-pointer"
-                style={{ animation: 'pulse 4s ease-in-out infinite' }}
-              >
-                <Heart className="h-5 w-5 text-amber-600" />
               </div>
             </div>
           </div>

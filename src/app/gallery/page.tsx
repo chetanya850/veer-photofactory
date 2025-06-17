@@ -23,7 +23,30 @@ const GalleryPage: FC = () => {
     'VEE01203.jpg',
     'VEE02049.jpg',
     'VEE02039.jpg',
-    'VEE01762.jpg'
+    'VEE01762.jpg',
+    'VEE01299.jpg',
+    'VEE01300.jpg',
+    'VEE01301.jpg',
+    'VEE01302.jpg',
+    'VEE01303.jpg',
+    'VEE01304.jpg',
+    'VEE01305.jpg',
+    'VEE01306.jpg',
+    'VEE01307.jpg',
+    'VEE01308.jpg',
+    'VEE01309.jpg',
+    'VEE01310.jpg',
+    'VEE01311.jpg',
+    'VEE01312.jpg',
+    'VEE01313.jpg',
+    'VEE01314.jpg',
+    'VEE01315.jpg',
+    'VEE01316.jpg',
+    'VEE01317.jpg',
+    'VEE01318.jpg',
+    'VEE01319.jpg',
+    'VEE01320.jpg',
+    'VEE01321.jpg'
   ]
 
   const containerVariants = {
@@ -51,7 +74,10 @@ const GalleryPage: FC = () => {
   // Group images into sets of 3 for collage layout
   const imageGroups = []
   for (let i = 0; i < images.length; i += 3) {
-    imageGroups.push(images.slice(i, i + 3))
+    const group = images.slice(i, i + 3)
+    if (group.length > 0) {
+      imageGroups.push(group)
+    }
   }
 
   const SmokeOverlay = () => (
@@ -107,7 +133,9 @@ const GalleryPage: FC = () => {
                   src={`/images/${group[0]}`}
                   alt="Gallery image"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700"
+                  priority={groupIndex === 0}
                 />
               </motion.div>
               <SmokeOverlay />
@@ -143,6 +171,7 @@ const GalleryPage: FC = () => {
                       src={`/images/${image}`}
                       alt="Gallery image"
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-600"
                     />
                   </motion.div>
@@ -184,6 +213,7 @@ const GalleryPage: FC = () => {
                       src={`/images/${image}`}
                       alt="Gallery image"
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-600"
                     />
                   </motion.div>
@@ -220,6 +250,7 @@ const GalleryPage: FC = () => {
                     src={`/images/${group[2]}`}
                     alt="Gallery image"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700"
                   />
                 </motion.div>
@@ -243,7 +274,7 @@ const GalleryPage: FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50 pt-16 sm:pt-20 lg:pt-24">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50 pt-16 sm:pt-20 lg:pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
