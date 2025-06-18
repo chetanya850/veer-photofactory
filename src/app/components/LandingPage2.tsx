@@ -1,13 +1,25 @@
 'use client'
-import { ArrowRight, Heart, Mail } from 'lucide-react'
-import { motion } from 'motion/react'
+import { ArrowRight, Heart } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
-import { FaInstagram } from 'react-icons/fa'
 
 const LandingPage2: FC = () => {
   const [isVisible, setIsVisible] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  // Sample images for the carousel - you can replace these with your actual images
+  const carouselImages = [
+    '/images/VEE06199.jpg',
+    '/images/VEE01255.jpg',
+    '/images/VEE01288.jpg',
+    '/images/VEE06606.jpg',
+    '/images/VEE01762.jpg',
+    '/images/VEE02039.jpg',
+    '/images/VEE03197.jpg',
+    '/images/VEE06527.jpg'
+  ]
 
   useEffect(() => {
     // Trigger animations after component mounts
@@ -15,91 +27,31 @@ const LandingPage2: FC = () => {
     return () => clearTimeout(timer)
   }, [])
 
+  useEffect(() => {
+    // Auto-play carousel
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prev => (prev + 1) % carouselImages.length)
+    }, 4000) // Change image every 4 seconds
+
+    return () => clearInterval(interval)
+  }, [carouselImages.length])
+
+  const nextImage = () => {
+    setCurrentImageIndex(prev => (prev + 1) % carouselImages.length)
+  }
+
+  const prevImage = () => {
+    setCurrentImageIndex(
+      prev => (prev - 1 + carouselImages.length) % carouselImages.length
+    )
+  }
+
+  const goToImage = (index: number) => {
+    setCurrentImageIndex(index)
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50 pb-16">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-stone-200/50">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -20 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="flex justify-between items-center py-5"
-          >
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="w-12 h-12 relative">
-                <Image
-                  src="/images/Logo.png"
-                  alt="Veer Photofactory Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <span className="text-xl font-light text-stone-800 tracking-wide">
-                Veer Photofactory
-              </span>
-            </Link>
-
-            <div className="hidden md:flex items-center space-x-10">
-              {[
-                { name: 'Home', path: '/' },
-                { name: 'About', path: '/about' },
-                { name: 'Gallery', path: '/gallery' },
-                { name: 'Services', path: '/services' },
-                { name: 'Contact', path: '/contact' }
-              ].map((item, index) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{
-                    opacity: isVisible ? 1 : 0,
-                    y: isVisible ? 0 : 30
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    ease: 'easeOut',
-                    delay: 0.1 + index * 0.15
-                  }}
-                >
-                  <Link
-                    href={item.path}
-                    className="relative text-stone-600 hover:text-amber-700 font-light text-sm tracking-wide uppercase transition-all duration-300 group"
-                  >
-                    {item.name}
-                    <motion.div
-                      className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-amber-600 to-orange-600"
-                      initial={{ width: 0 }}
-                      whileHover={{ width: '100%' }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="flex items-center space-x-5">
-              <motion.a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <FaInstagram className="h-4 w-4 text-stone-500 hover:text-amber-700 cursor-pointer transition-all duration-300" />
-              </motion.a>
-              <motion.a
-                href="mailto:contact@veerphotofactory.com"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Mail className="h-4 w-4 text-stone-500 hover:text-amber-700 cursor-pointer transition-all duration-300" />
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
-      </nav>
-
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-50 to-orange-50">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center pt-20">
         {/* Animated Background Elements */}
@@ -294,6 +246,123 @@ const LandingPage2: FC = () => {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Carousel Section */}
+      <section className="py-20 px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 60 }}
+            transition={{ duration: 0.8, ease: 'easeOut', delay: 0.5 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-light text-stone-800 mb-6">
+              Our Latest
+              <span className="text-amber-700 font-normal italic">
+                {' '}
+                Moments
+              </span>
+            </h2>
+            <p className="text-lg text-stone-600 max-w-2xl mx-auto font-light">
+              Discover the beauty and emotion captured in our most recent
+              photography sessions
+            </p>
+          </motion.div>
+
+          {/* Carousel Container */}
+          <div className="relative">
+            <div className="overflow-hidden rounded-lg shadow-2xl">
+              <div className="relative h-[500px] lg:h-[600px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentImageIndex}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.7, ease: 'easeInOut' }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={carouselImages[currentImageIndex]}
+                      alt={`Wedding Photography ${currentImageIndex + 1}`}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <motion.button
+              onClick={prevImage}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all duration-300 group"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <svg
+                className="w-6 h-6 text-stone-700 group-hover:text-amber-700 transition-colors duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </motion.button>
+
+            <motion.button
+              onClick={nextImage}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all duration-300 group"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <svg
+                className="w-6 h-6 text-stone-700 group-hover:text-amber-700 transition-colors duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </motion.button>
+
+            {/* Dots Indicator */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3">
+              {carouselImages.map((_, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => goToImage(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentImageIndex
+                      ? 'bg-white scale-125'
+                      : 'bg-white/50 hover:bg-white/75'
+                  }`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                />
+              ))}
+            </div>
+
+            {/* Image Counter */}
+            <div className="absolute top-6 right-6 bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-light">
+              {currentImageIndex + 1} / {carouselImages.length}
+            </div>
           </div>
         </div>
       </section>
