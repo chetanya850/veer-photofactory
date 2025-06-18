@@ -1,10 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Facebook, Heart, Instagram, Mail } from 'lucide-react'
+import { ArrowRight, Heart, Mail } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
+import { FaFacebookSquare, FaInstagram } from 'react-icons/fa'
 
 const LandingPage: FC = () => {
   const fadeInUp = {
@@ -53,9 +54,7 @@ const LandingPage: FC = () => {
                 alt="Veer Photofactory Logo"
                 width={32}
                 height={32}
-                // className="h-8 w-8"
               />
-              {/* <span className="h-8 w-8 text-rose-500 bg-[url(/images/Logo)]" /> */}
               <span className="text-2xl font-bold bg-gradient-to-r from-rose-500 to-pink-600 bg-clip-text text-transparent">
                 Veer Photofactory
               </span>
@@ -85,8 +84,8 @@ const LandingPage: FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 }}
             >
-              <Instagram className="h-5 w-5 text-gray-600 hover:text-rose-500 cursor-pointer transition-colors" />
-              <Facebook className="h-5 w-5 text-gray-600 hover:text-rose-500 cursor-pointer transition-colors" />
+              <FaInstagram className="h-5 w-5 text-gray-600 hover:text-rose-500 cursor-pointer transition-colors" />
+              <FaFacebookSquare className="h-5 w-5 text-gray-600 hover:text-rose-500 cursor-pointer transition-colors" />
               <Mail className="h-5 w-5 text-gray-600 hover:text-rose-500 cursor-pointer transition-colors" />
             </motion.div>
           </div>
@@ -186,33 +185,6 @@ const LandingPage: FC = () => {
                   Learn More
                 </motion.button>
               </motion.div>
-
-              {/* <motion.div
-                variants={fadeInUp}
-                className="mt-12 flex items-center justify-center lg:justify-start space-x-8"
-              >
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-gray-900">500+</div>
-                  <div className="text-gray-600">Weddings</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-gray-900">5</div>
-                  <div className="text-gray-600">Years Experience</div>
-                </div>
-                <div className="text-center flex items-center">
-                  <div className="text-3xl font-bold text-gray-900 mr-2">
-                    5.0
-                  </div>
-                  <div className="flex">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="h-5 w-5 text-yellow-400 fill-current"
-                      />
-                    ))}
-                  </div>
-                </div>
-              </motion.div> */}
             </motion.div>
 
             {/* Right Content - Image Grid */}
@@ -277,51 +249,9 @@ const LandingPage: FC = () => {
                   </div>
                 </motion.div>
               </div>
-
-              {/* Floating Elements */}
-              {/* <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: 'easeInOut'
-                }}
-                className="absolute -top-6 -right-6 bg-white p-4 rounded-full shadow-lg"
-              >
-                <Heart className="h-8 w-8 text-rose-500" />
-              </motion.div> */}
-
-              {/* <motion.div
-                animate={{ y: [10, -10, 10] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: 'easeInOut'
-                }}
-                className="absolute -bottom-4 -left-4 bg-white p-3 rounded-full shadow-lg"
-              >
-                <Camera className="h-6 w-6 text-pink-500" />
-              </motion.div> */}
             </motion.div>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        {/* <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center text-gray-400"
-          >
-            <span className="text-sm mb-2">Scroll Down</span>
-            <div className="w-px h-8 bg-gradient-to-b from-gray-400 to-transparent"></div>
-          </motion.div>
-        </motion.div> */}
       </section>
     </div>
   )
